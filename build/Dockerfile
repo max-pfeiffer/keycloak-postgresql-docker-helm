@@ -2,8 +2,9 @@ ARG KEYCLOAK_VERSION
 FROM quay.io/keycloak/keycloak:${KEYCLOAK_VERSION} as builder
 
 # Enable health and metrics support
-ENV KC_HEALTH_ENABLED=true
-ENV KC_METRICS_ENABLED=true
+ENV KC_DB=postgres \
+    KC_HEALTH_ENABLED=true \
+    KC_METRICS_ENABLED=true
 
 RUN /opt/keycloak/bin/kc.sh build
 

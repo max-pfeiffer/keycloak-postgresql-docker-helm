@@ -52,17 +52,14 @@ def test_image_run(
         # https://www.keycloak.org/server/enabletls
         environment_variables: dict = {
             "KC_HOSTNAME": hostname,
-            "KC_DB": "postgres",
             "KC_DB_USERNAME": POSTGRESQL_USERNAME,
             "KC_DB_PASSWORD": POSTGRESQL_PASSWORD,
             "KC_DB_URL_HOST": "host.docker.internal",
             "KC_DB_URL_DATABASE": POSTGRESQL_DATABASE_NAME,
             "KC_HTTPS_CERTIFICATE_FILE": str(certificate_pem),
             "KC_HTTPS_CERTIFICATE_KEY_FILE": str(private_key_pem),
-            "KC_HTTPS_PORT": "443",
             "KEYCLOAK_ADMIN": "admin",
             "KEYCLOAK_ADMIN_PASSWORD": "admin",
-            "KC_HEALTH_ENABLED": "true",
         }
         volumes: list = [
             (
@@ -79,10 +76,9 @@ def test_image_run(
             keycloak_image_reference,
             envs=environment_variables,
             volumes=volumes,
-            # command=["start", "--optimized"],
-            command=["start"],
+            command=["start", "--optimized"],
             detach=True,
-            publish=[(443, 443)],
+            publish=[(443, 8443)],
         )
         assert keycloak_container
 
