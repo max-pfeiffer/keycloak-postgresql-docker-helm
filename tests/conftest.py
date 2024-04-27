@@ -8,7 +8,14 @@ from semver import VersionInfo
 from testcontainers.postgres import PostgresContainer
 from testcontainers.registry import DockerRegistryContainer
 
-from tests.constants import REGISTRY_PASSWORD, REGISTRY_USERNAME
+from build.utils import build_image, get_image_reference
+from tests.constants import (
+    POSTGRESQL_DATABASE_NAME,
+    POSTGRESQL_PASSWORD,
+    POSTGRESQL_USERNAME,
+    REGISTRY_PASSWORD,
+    REGISTRY_USERNAME,
+)
 
 
 @pytest.fixture(scope="session")
@@ -66,6 +73,45 @@ def postgres_container() -> PostgresContainer:
     :return:
     """
     with PostgresContainer(
-        username=REGISTRY_USERNAME, password=REGISTRY_PASSWORD, dbname="test"
+        image="postgres:15",
+        username=POSTGRESQL_USERNAME,
+        password=POSTGRESQL_PASSWORD,
+        dbname=POSTGRESQL_DATABASE_NAME,
     ).with_bind_ports(5432, 5432) as postgres_container:
         yield postgres_container
+
+
+@pytest.fixture(scope="session")
+def keycloak_image_reference(
+    docker_client: DockerClient,
+    buildx_builder: Builder,
+    image_version: str,
+    registry_container: DockerRegistryContainer,
+) -> str:
+    """Fixture building the Keycloak image and providing the image reference.
+
+    :param docker_client:
+    :param buildx_builder:
+    :param image_version:
+    :param registry_container:
+    :return:
+    """
+    docker_client.login(
+        server=registry_container.get_registry(),
+        username=REGISTRY_USERNAME,
+        password=REGISTRY_PASSWORD,
+    )
+
+    keycloak_version: str = "24.0.3"
+    image_reference: str = get_image_reference(
+        registry_container.get_registry(), image_version, keycloak_version
+    )
+
+    build_image(
+        docker_client,
+        buildx_builder,
+        registry_container.get_registry(),
+        image_version,
+        keycloak_version,
+    )
+    yield image_reference

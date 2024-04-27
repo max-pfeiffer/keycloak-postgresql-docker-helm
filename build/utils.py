@@ -3,6 +3,10 @@
 from pathlib import Path
 from typing import Optional
 
+from python_on_whales import Builder, DockerClient
+
+from build.constants import PLATFORMS
+
 
 def get_context() -> Path:
     """Docker build context.
@@ -48,3 +52,42 @@ def cache_settings(github_ref_name: Optional[str], keycloak_version: str) -> tup
         cache_from = f"type=local,src=/tmp,scope={cache_scope}"
 
     return cache_to, cache_from
+
+
+def build_image(
+    docker_client: DockerClient,
+    builder: Builder,
+    registry: str,
+    image_version: str,
+    keycloak_version: str,
+    github_ref_name: Optional[str] = None,
+) -> None:
+    """Build the Docker image.
+
+    :param docker_client:
+    :param builder:
+    :param registry:
+    :param image_version:
+    :param keycloak_version:
+    :param github_ref_name:
+    :return:
+    """
+    context: Path = get_context()
+    image_reference: str = get_image_reference(
+        registry, image_version, keycloak_version
+    )
+    cache_to, cache_from = cache_settings(github_ref_name, keycloak_version)
+
+    docker_client.buildx.build(
+        context_path=context,
+        target="production-image",
+        build_args={
+            "KEYCLOAK_VERSION": keycloak_version,
+        },
+        tags=image_reference,
+        platforms=PLATFORMS,
+        builder=builder,
+        cache_to=cache_to,
+        cache_from=cache_from,
+        push=True,
+    )

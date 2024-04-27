@@ -1,13 +1,11 @@
 """Publish CLI."""
 
 from os import getenv
-from pathlib import Path
 
 import click
 from python_on_whales import Builder, DockerClient
 
-from build.constants import PLATFORMS
-from build.utils import cache_settings, get_context, get_image_reference
+from build.utils import build_image
 
 
 @click.command()
@@ -42,9 +40,6 @@ def main(
     :return:
     """
     github_ref_name: str = getenv("GITHUB_REF_NAME")
-    context: Path = get_context()
-    image_reference: str = get_image_reference(registry, version_tag, keycloak_version)
-    cache_to, cache_from = cache_settings(github_ref_name, keycloak_version)
 
     docker_client: DockerClient = DockerClient()
     builder: Builder = docker_client.buildx.create(
@@ -57,18 +52,13 @@ def main(
         password=docker_hub_password,
     )
 
-    docker_client.buildx.build(
-        context_path=context,
-        target="production-image",
-        build_args={
-            "KEYCLOAK_VERSION": keycloak_version,
-        },
-        tags=image_reference,
-        platforms=PLATFORMS,
-        builder=builder,
-        cache_to=cache_to,
-        cache_from=cache_from,
-        push=True,
+    build_image(
+        docker_client,
+        builder,
+        registry,
+        version_tag,
+        keycloak_version,
+        github_ref_name=github_ref_name,
     )
 
     # Cleanup
