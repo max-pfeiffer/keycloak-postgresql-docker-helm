@@ -21,7 +21,7 @@ def test_image_build(
     :return:
     """
     furl_item: furl = furl(f"http://{registry_container.get_registry()}")
-    furl_item.path /= "v2/pfeiffermax/keycloak/tags/list"
+    furl_item.path /= "v2/pfeiffermax/keycloak-postgresql/tags/list"
 
     response: Response = get(furl_item.url, auth=BASIC_AUTH)
 

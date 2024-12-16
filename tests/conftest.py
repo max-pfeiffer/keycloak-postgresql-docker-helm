@@ -104,14 +104,13 @@ def keycloak_image_reference(
 
     keycloak_version: str = "24.0.3"
     image_reference: str = get_image_reference(
-        registry_container.get_registry(), image_version, keycloak_version
+        registry_container.get_registry(), keycloak_version
     )
 
     build_image(
         docker_client,
         buildx_builder,
         registry_container.get_registry(),
-        image_version,
         keycloak_version,
     )
     yield image_reference

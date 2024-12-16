@@ -1,7 +1,5 @@
 """Publish CLI."""
 
-from os import getenv
-
 import click
 from python_on_whales import Builder, DockerClient
 
@@ -19,14 +17,18 @@ from build.utils import build_image
     envvar="DOCKER_HUB_PASSWORD",
     help="Docker Hub password",
 )
-@click.option("--version-tag", envvar="GIT_TAG_NAME", required=True, help="Version tag")
+@click.option(
+    "--keycloak-version",
+    envvar="KEYCLOAK_VERSION",
+    required=True,
+    help="Keycloak version",
+)
 @click.option(
     "--registry", envvar="REGISTRY", default="docker.io", help="Docker registry"
 )
 def main(
     docker_hub_username: str,
     docker_hub_password: str,
-    version_tag: str,
     keycloak_version: str,
     registry: str,
 ) -> None:
@@ -34,13 +36,10 @@ def main(
 
     :param docker_hub_username:
     :param docker_hub_password:
-    :param version_tag:
     :param keycloak_version:
     :param registry:
     :return:
     """
-    github_ref_name: str = getenv("GITHUB_REF_NAME")
-
     docker_client: DockerClient = DockerClient()
     builder: Builder = docker_client.buildx.create(
         driver="docker-container", driver_options=dict(network="host")
@@ -56,9 +55,7 @@ def main(
         docker_client,
         builder,
         registry,
-        version_tag,
         keycloak_version,
-        github_ref_name=github_ref_name,
     )
 
     # Cleanup
