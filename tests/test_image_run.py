@@ -2,6 +2,7 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from time import time
 
 import trustme
 from httpx import Client, ConnectError, ConnectTimeout, Response
@@ -28,6 +29,10 @@ def test_image_run(
     :return:
     """
     hostname: str = "localhost"
+
+    # Since v25.0 Keycloak health checks are exposed on management port 9000 by default
+    # See: https://www.keycloak.org/server/health
+    keycloak_management_port: int = 9000
 
     ca = trustme.CA()
     server_cert = ca.issue_cert(hostname)
@@ -78,7 +83,7 @@ def test_image_run(
             volumes=volumes,
             command=["start", "--optimized"],
             detach=True,
-            publish=[(443, 8443)],
+            publish=[(443, 8443), (keycloak_management_port, keycloak_management_port)],
         )
         assert keycloak_container
 
@@ -86,15 +91,20 @@ def test_image_run(
 
         with ca.cert_pem.tempfile() as ca_temp_path:
             client = Client(verify=ca_temp_path)
+            timeout = time() + 30
 
             while ready_status_code != 200:
                 try:
                     response: Response = client.get(
-                        f"https://{hostname}/health/ready", timeout=1
+                        f"https://{hostname}:{keycloak_management_port}/health/ready",
+                        timeout=1,
                     )
                     ready_status_code = response.status_code
                 except (TimeoutError, ConnectError, ConnectTimeout):
                     pass
+
+                if time() > timeout:
+                    break
 
         assert ready_status_code == 200
 

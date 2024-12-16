@@ -1,5 +1,6 @@
 """Basic test fixtures."""
 
+from os import getenv
 from random import randrange
 
 import pytest
@@ -72,8 +73,9 @@ def postgres_container() -> PostgresContainer:
 
     :return:
     """
+    postgresql_version: str = getenv("POSTGRESQL_VERSION")
     with PostgresContainer(
-        image="postgres:15",
+        image=f"postgres:{postgresql_version}",
         username=POSTGRESQL_USERNAME,
         password=POSTGRESQL_PASSWORD,
         dbname=POSTGRESQL_DATABASE_NAME,
@@ -102,7 +104,7 @@ def keycloak_image_reference(
         password=REGISTRY_PASSWORD,
     )
 
-    keycloak_version: str = "24.0.3"
+    keycloak_version: str = getenv("KEYCLOAK_VERSION")
     image_reference: str = get_image_reference(
         registry_container.get_registry(), keycloak_version
     )

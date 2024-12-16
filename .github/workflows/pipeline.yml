@@ -29,9 +29,12 @@ jobs:
         run: |
           poetry install --no-interaction --no-root
       - name: Run tests for image builds with pytest
+        env:
+          KEYCLOAK_VERSION: 26.0.7
+          POSTGRESQL_VERSION: 17.2
         run: |
           poetry run pytest --cov build --cov-report=xml
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
