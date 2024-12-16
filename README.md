@@ -1,2 +1,2 @@
-# keycloak-docker
-Docker image for running Keycloak.
+# Keycloak PostgreSQL Kubernetes
+Docker image and Helm chart for running Keycloak with PostgreSQL database on Kubernetes.
