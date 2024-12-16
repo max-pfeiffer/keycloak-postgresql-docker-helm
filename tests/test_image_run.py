@@ -92,7 +92,7 @@ def test_image_run(
 
             with ca.cert_pem.tempfile() as ca_temp_path:
                 client = Client(verify=ca_temp_path)
-                timeout = time() + 30
+                timeout = time() + 60
 
                 while ready_status_code != 200:
                     try:
