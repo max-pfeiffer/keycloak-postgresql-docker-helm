@@ -83,6 +83,8 @@ def test_image_run(
             volumes=volumes,
             command=["start", "--optimized"],
             detach=True,
+            interactive=True,
+            tty=True,
             publish=[(443, 8443), (keycloak_management_port, keycloak_management_port)],
         ) as keycloak_container:
             assert keycloak_container.state.status == "running"
