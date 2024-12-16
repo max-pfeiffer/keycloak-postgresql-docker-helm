@@ -6,7 +6,7 @@ from time import time
 
 import trustme
 from httpx import Client, ConnectError, ConnectTimeout, Response
-from python_on_whales import Container, DockerClient
+from python_on_whales import DockerClient
 from testcontainers.postgres import PostgresContainer
 
 from tests.constants import (
@@ -77,37 +77,32 @@ def test_image_run(
             ),
         ]
 
-        keycloak_container: Container = docker_client.container.run(
+        with docker_client.container.run(
             keycloak_image_reference,
             envs=environment_variables,
             volumes=volumes,
             command=["start", "--optimized"],
             detach=True,
             publish=[(443, 8443), (keycloak_management_port, keycloak_management_port)],
-        )
-        assert keycloak_container
+        ) as keycloak_container:
+            assert keycloak_container.state.status == "running"
+            ready_status_code = None
 
-        ready_status_code = None
+            with ca.cert_pem.tempfile() as ca_temp_path:
+                client = Client(verify=ca_temp_path)
+                timeout = time() + 30
 
-        with ca.cert_pem.tempfile() as ca_temp_path:
-            client = Client(verify=ca_temp_path)
-            timeout = time() + 30
+                while ready_status_code != 200:
+                    try:
+                        response: Response = client.get(
+                            f"https://{hostname}:{keycloak_management_port}/health/ready",
+                            timeout=1,
+                        )
+                        ready_status_code = response.status_code
+                    except (TimeoutError, ConnectError, ConnectTimeout):
+                        pass
 
-            while ready_status_code != 200:
-                try:
-                    response: Response = client.get(
-                        f"https://{hostname}:{keycloak_management_port}/health/ready",
-                        timeout=1,
-                    )
-                    ready_status_code = response.status_code
-                except (TimeoutError, ConnectError, ConnectTimeout):
-                    pass
+                    if time() > timeout:
+                        break
 
-                if time() > timeout:
-                    break
-
-        assert ready_status_code == 200
-
-        # Tear down
-        keycloak_container.stop()
-        keycloak_container.remove()
+            assert ready_status_code == 200
