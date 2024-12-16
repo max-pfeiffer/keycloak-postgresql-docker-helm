@@ -4,6 +4,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from time import time
 
+import pytest
 import trustme
 from httpx import Client, ConnectError, ConnectTimeout, Response
 from python_on_whales import DockerClient
@@ -14,8 +15,13 @@ from tests.constants import (
     POSTGRESQL_PASSWORD,
     POSTGRESQL_USERNAME,
 )
+from tests.utils import running_on_github_actions
 
 
+@pytest.mark.skipif(
+    running_on_github_actions(),
+    reason="Connection Error for Keycloak Container on GitHub",
+)
 def test_image_run(
     docker_client: DockerClient,
     keycloak_image_reference: str,
