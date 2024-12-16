@@ -82,6 +82,7 @@ def test_image_run(
             envs=environment_variables,
             volumes=volumes,
             command=["start", "--optimized"],
+            platform="linux/amd64",
             detach=True,
             interactive=True,
             tty=True,
