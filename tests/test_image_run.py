@@ -101,8 +101,8 @@ def test_image_run(
                             timeout=1,
                         )
                         ready_status_code = response.status_code
-                    except (TimeoutError, ConnectError, ConnectTimeout):
-                        pass
+                    except (TimeoutError, ConnectError, ConnectTimeout) as exc:
+                        ready_status_code = str(exc)
 
                     if time() > timeout:
                         break
