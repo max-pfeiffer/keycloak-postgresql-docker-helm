@@ -1,7 +1,6 @@
 """Test utilities."""
 
 from dataclasses import dataclass
-from os import getenv
 
 from docker_image import reference
 
@@ -31,12 +30,3 @@ class ImageTagComponents:
             image_name=image_name,
             tag=tag,
         )
-
-
-def running_on_github_actions() -> bool:
-    """Check if running on GitHub Actions.
-
-    :return:
-    """
-    bool_value = getenv("GITHUB_ACTIONS", "false") == "true"
-    return bool_value
