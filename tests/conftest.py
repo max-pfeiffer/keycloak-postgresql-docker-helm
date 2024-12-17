@@ -1,6 +1,5 @@
 """Basic test fixtures."""
 
-from os import getenv
 from random import randrange
 
 import pytest
@@ -11,9 +10,11 @@ from testcontainers.registry import DockerRegistryContainer
 
 from build.utils import build_image, get_image_reference
 from tests.constants import (
+    KEYCLOAK_VERSION,
     POSTGRESQL_DATABASE_NAME,
     POSTGRESQL_PASSWORD,
     POSTGRESQL_USERNAME,
+    POSTGRESQL_VERSION,
     REGISTRY_PASSWORD,
     REGISTRY_USERNAME,
 )
@@ -73,9 +74,8 @@ def postgres_container() -> PostgresContainer:
 
     :return:
     """
-    postgresql_version: str = getenv("POSTGRESQL_VERSION")
     with PostgresContainer(
-        image=f"postgres:{postgresql_version}",
+        image=f"postgres:{POSTGRESQL_VERSION}",
         username=POSTGRESQL_USERNAME,
         password=POSTGRESQL_PASSWORD,
         dbname=POSTGRESQL_DATABASE_NAME,
@@ -104,15 +104,14 @@ def keycloak_image_reference(
         password=REGISTRY_PASSWORD,
     )
 
-    keycloak_version: str = getenv("KEYCLOAK_VERSION")
     image_reference: str = get_image_reference(
-        registry_container.get_registry(), keycloak_version
+        registry_container.get_registry(), KEYCLOAK_VERSION
     )
 
     build_image(
         docker_client,
         buildx_builder,
         registry_container.get_registry(),
-        keycloak_version,
+        KEYCLOAK_VERSION,
     )
     yield image_reference
