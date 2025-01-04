@@ -1,0 +1,25 @@
+apiVersion: v1
+entries:
+  keycloak:
+  - apiVersion: v2
+    appVersion: 26.0.7
+    created: "2025-01-04T14:39:30.291967745Z"
+    description: Helm chart for installing Keycloak identity provider
+    digest: 24e4338e47ed1c34f4f20ee053ababc9af7d1f268331fb5177d69d6305ee3c8f
+    name: keycloak
+    type: application
+    urls:
+    - https://github.com/max-pfeiffer/keycloak-postgresql-helm/releases/download/keycloak-0.1.0/keycloak-0.1.0.tgz
+    version: 0.1.0
+  postgresql:
+  - apiVersion: v2
+    appVersion: "17.2"
+    created: "2025-01-04T14:39:30.419286902Z"
+    description: Helm chart for installing PostgreSQL database
+    digest: 5d3f4a752bf5b92f4abd856510f6e0967a60278b6a7fe642fa69688aa576f995
+    name: postgresql
+    type: application
+    urls:
+    - https://github.com/max-pfeiffer/keycloak-postgresql-helm/releases/download/postgresql-0.1.0/postgresql-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-01-04T14:39:30.419292843Z"
