@@ -2,9 +2,10 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![codecov](https://codecov.io/gh/max-pfeiffer/keycloak-postgresql-kubernetes/graph/badge.svg?token=ATRh4DIH7r)](https://codecov.io/gh/max-pfeiffer/keycloak-postgresql-kubernetes)
 ![pipeline workflow](https://github.com/max-pfeiffer/keycloak-postgresql-kubernetes/actions/workflows/pipeline.yml/badge.svg)
+![helm-release workflow](https://github.com/max-pfeiffer/keycloak-postgresql-kubernetes/actions/workflows/helm-release.yml/badge.svg)
 ![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/pfeiffermax/keycloak-postgresql?sort=semver)
 ![Docker Pulls](https://img.shields.io/docker/pulls/pfeiffermax/keycloak-postgresql)
-# Keycloak PostgreSQL Kubernetes
+# Keycloak PostgreSQL Docker Image and Helm Charts 
 Docker image and Helm charts for running Keycloak with PostgreSQL database on Kubernetes.
 
 ## Docker Image
