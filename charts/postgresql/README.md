@@ -5,7 +5,7 @@ Helm chart for installing [PostgreSQL database](https://www.postgresql.org/) on 
 Please see [values.yaml](values.yaml) for configuration options.
 
 ### Example
-Simple example configuration using [Ceph-CSI](https://github.com/ceph/ceph-csi) storage class: 
+Simple example configuration using [Ceph-CSI RBD](https://github.com/ceph/ceph-csi) storage class: 
 ```yaml
 configMap:
   POSTGRES_DB: "keycloak"
