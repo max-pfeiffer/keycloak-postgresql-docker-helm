@@ -5,7 +5,7 @@
 ![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/pfeiffermax/keycloak-postgresql?sort=semver)
 ![Docker Pulls](https://img.shields.io/docker/pulls/pfeiffermax/keycloak-postgresql)
 # Keycloak PostgreSQL Kubernetes
-Docker image and Helm chart for running Keycloak with PostgreSQL database on Kubernetes.
+Docker image and Helm charts for running Keycloak with PostgreSQL database on Kubernetes.
 
 ## Docker Image
 Features:
