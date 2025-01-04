@@ -1,6 +1,6 @@
 apiVersion: v2
-name: keycloak-postgresql
-description: A Helm chart for Kubernetes
+name: keycloak
+description: Helm chart for installing Keycloak identity provider
 
 # A chart can be either an 'application' or a 'library' chart.
 #

@@ -2,9 +2,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "keycloak-postgresql.fullname" . }}
+  name: {{ include "keycloak.fullname" . }}
   labels:
-    {{- include "keycloak-postgresql.labels" . | nindent 4 }}
+    {{- include "keycloak.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -35,7 +35,7 @@ spec:
             {{- end }}
             backend:
               service:
-                name: {{ include "keycloak-postgresql.fullname" $ }}
+                name: {{ include "keycloak.fullname" $ }}
                 port:
                   number: {{ $.Values.service.port }}
           {{- end }}

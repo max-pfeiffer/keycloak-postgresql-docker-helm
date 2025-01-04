@@ -1,4 +1,4 @@
-# Default values for keycloak-postgresql.
+# Default values for keycloak.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -122,12 +122,12 @@ tolerations: []
 
 affinity: {}
 
-environmentVariables:
+configMap:
   KC_HOSTNAME: "https://keycloak.lan"
   KC_HOSTNAME_ADMIN: "https://keycloak-admin.lan"
-  KC_HTTP_ENABLED: true
-  KC_DB_URL_HOST: "postgresql",
-  KC_DB_URL_DATABASE: "keycloak",
+  KC_HTTP_ENABLED: "true"
+  KC_DB_URL_HOST: "postgresql"
+  KC_DB_URL_DATABASE: "keycloak"
 
 secrets:
   KC_BOOTSTRAP_ADMIN_USERNAME: "username"
