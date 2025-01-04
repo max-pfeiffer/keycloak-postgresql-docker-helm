@@ -7,9 +7,20 @@
 # Keycloak PostgreSQL Kubernetes
 Docker image and Helm chart for running Keycloak with PostgreSQL database on Kubernetes.
 
+## Docker Image
 Features:
 * PostgreSQL database backend
 * Health checks enabled
 * Metrics enabled
 
 **Docker Hub:** [https://hub.docker.com/r/pfeiffermax/keycloak-postgresql](https://hub.docker.com/r/pfeiffermax/keycloak-postgresql)
+
+## Helm Charts
+Use this Helm charts to install Keycloak with this Docker Image on Kubernetes:
+```shell
+
+```
+
+For further documentation and examples see:
+* [Keycloak Helm Chart](charts%2Fkeycloak%2FREADME.md)
+* [PostgreSQL Helm Chart](charts%2Fpostgresql%2FREADME.md)

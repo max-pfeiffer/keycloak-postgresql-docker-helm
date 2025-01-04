@@ -1,10 +1,17 @@
 # Keycloak Helm Chart
+Helm chart for installing [Keycloak](https://www.keycloak.org/) on Kubernetes. It uses
+[pfeiffermax/keycloak-postgresql](https://hub.docker.com/r/pfeiffermax/keycloak-postgresql) as Docker image which is
+specifically built to use PostgresSQL as database.
+
+Per default, this chart installs Keycloak with TLS disabled. Just set `ingress.enabled: true` in [values.yaml](values.yaml)
+to add an Ingress for this default configuration.
 
 ## values.yaml
+Please see [values.yaml](values.yaml) for configuration options.
 
 ### Examples 
 #### HTTP only
-Using nginx ingress controller without TLS (for testing purposes):
+Using nginx ingress controller without TLS (default config, for testing purposes):
 ```yaml
 ingress:
   enabled: true

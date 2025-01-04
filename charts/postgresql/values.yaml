@@ -92,7 +92,7 @@ tolerations: []
 
 affinity: {}
 
-environmentVariables:
+configMap:
   POSTGRES_DB: "keycloak"
 
 secrets:
@@ -100,7 +100,7 @@ secrets:
   POSTGRES_PASSWORD: "password"
 
 persistentVolumeClaim:
-  storageClassName: "csi-rbd-sc"
+  storageClassName: ""
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   storageSize: 1Gi
