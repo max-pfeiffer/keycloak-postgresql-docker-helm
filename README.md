@@ -17,6 +17,10 @@ Features:
 **Docker Hub:** [https://hub.docker.com/r/pfeiffermax/keycloak-postgresql](https://hub.docker.com/r/pfeiffermax/keycloak-postgresql)
 
 ## Helm Charts
+### Repository URL
+Helm repository URL: [https://max-pfeiffer.github.io/keycloak-postgresql-docker-helm](https://max-pfeiffer.github.io/keycloak-postgresql-docker-helm)
+
+### Usage
 Use the Helm charts to install Keycloak with this Docker Image on Kubernetes:
 ```shell
 helm repo add keycloak-postgresql https://max-pfeiffer.github.io/keycloak-postgresql-docker-helm
@@ -24,6 +28,7 @@ helm install postgresql keycloak-postgresql/postgresql --values your_values.yaml
 helm install keycloak keycloak-postgresql/keycloak --values your_values.yaml --namespace your-namespace
 ```
 
+### Documentation
 For further documentation and `values.yaml` examples see:
 * [Keycloak Helm Chart](charts%2Fkeycloak%2FREADME.md)
 * [PostgreSQL Helm Chart](charts%2Fpostgresql%2FREADME.md)
