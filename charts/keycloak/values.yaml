@@ -59,7 +59,7 @@ service:
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
   enabled: false
-  className: "nginx"
+  className: ""
   annotations: {}
   hosts:
     - host: "keycloak.lan"
@@ -124,15 +124,17 @@ tolerations: []
 
 affinity: {}
 
-configMap:
-  KC_HOSTNAME: "http://keycloak.lan"
-  KC_HOSTNAME_ADMIN: "http://keycloak-admin.lan"
-  KC_HTTP_ENABLED: "true"
-  KC_DB_URL_HOST: "postgresql"
-  KC_DB_URL_DATABASE: "keycloak"
+configMap: {}
+#  KC_HOSTNAME: "http://keycloak.lan"
+#  KC_HOSTNAME_ADMIN: "http://keycloak-admin.lan"
+#  KC_HTTP_ENABLED: "true"
+#  KC_DB_URL_HOST: "postgresql"
+#  KC_DB_URL_DATABASE: "keycloak"
 
-secrets:
-  KC_BOOTSTRAP_ADMIN_USERNAME: "username"
-  KC_BOOTSTRAP_ADMIN_PASSWORD: "password"
-  KC_DB_USERNAME: "username"
-  KC_DB_PASSWORD: "password"
+secrets: {}
+#  KC_BOOTSTRAP_ADMIN_CLIENT_ID: "opentofu"
+#  KC_BOOTSTRAP_ADMIN_CLIENT_SECRET: "884e0f95-0f42-4a63-9b1f-94274655669e"
+#  KC_BOOTSTRAP_ADMIN_USERNAME: "username"
+#  KC_BOOTSTRAP_ADMIN_PASSWORD: "password"
+#  KC_DB_USERNAME: "username"
+#  KC_DB_PASSWORD: "password"

@@ -32,3 +32,6 @@ helm install keycloak keycloak-postgresql/keycloak --values your_values.yaml --n
 For further documentation and `values.yaml` examples see:
 * [Keycloak Helm Chart](charts%2Fkeycloak%2FREADME.md)
 * [PostgreSQL Helm Chart](charts%2Fpostgresql%2FREADME.md)
+
+## Information Sources
+* [List of all Keycloak configuration options](https://www.keycloak.org/server/all-config) 
