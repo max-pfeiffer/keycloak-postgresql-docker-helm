@@ -3,15 +3,25 @@ Helm chart for installing [Keycloak](https://www.keycloak.org/) on Kubernetes. I
 [pfeiffermax/keycloak-postgresql](https://hub.docker.com/r/pfeiffermax/keycloak-postgresql) as Docker image which is
 specifically built to use PostgresSQL as database.
 
-Per default, this chart installs Keycloak with TLS disabled. Just set `ingress.enabled: true` in [values.yaml](values.yaml)
-to add an Ingress for this default configuration.
-
 ## values.yaml
 Please see [values.yaml](values.yaml) for configuration options.
 
 ### Examples 
+#### Bootstrap Admin Client for Automated Provisioning
+When you do infrastructure-as-code with [OpenTofu](https://opentofu.org/) or Terraform using the
+[Keycloak provider](https://github.com/keycloak/terraform-provider-keycloak), you need a client
+in the master realm for it. Since v26.0.0 Keycloak is providing such an option:
+```yaml
+secrets:
+  KC_BOOTSTRAP_ADMIN_CLIENT_ID: "opentofu"
+  KC_BOOTSTRAP_ADMIN_CLIENT_SECRET: "884e0f95-0f42-4a63-9b1f-94274655669e"
+```
+You can read [this abstract](https://github.com/keycloak/keycloak/issues/9829#issuecomment-2109799158) about the concept.
+Also, [the official documentation](https://www.keycloak.org/server/all-config#category-bootstrap_admin) contains just
+a little bit off information about that great new feature. Not so sure why.
+
 #### HTTP only
-Using nginx ingress controller without TLS (default config, for testing purposes):
+Using nginx ingress controller without TLS (for testing purposes):
 ```yaml
 ingress:
   enabled: true

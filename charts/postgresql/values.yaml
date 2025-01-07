@@ -92,12 +92,12 @@ tolerations: []
 
 affinity: {}
 
-configMap:
-  POSTGRES_DB: "keycloak"
+configMap: {}
+#  POSTGRES_DB: "keycloak"
 
-secrets:
-  POSTGRES_USER: "username"
-  POSTGRES_PASSWORD: "password"
+secrets: {}
+#  POSTGRES_USER: "username"
+#  POSTGRES_PASSWORD: "password"
 
 persistentVolumeClaim:
   storageClassName: ""
