@@ -25,7 +25,7 @@ def test_registry_with_credentials(
         args=[
             "--docker-hub-username",
             REGISTRY_USERNAME,
-            "--docker-hub-password",
+            "--docker-hub-token",
             REGISTRY_PASSWORD,
             "--keycloak-version",
             KEYCLOAK_VERSION,
@@ -53,7 +53,7 @@ def test_registry_with_wrong_credentials(
         args=[
             "--docker-hub-username",
             "bang",
-            "--docker-hub-password",
+            "--docker-hub-token",
             "boom",
             "--keycloak-version",
             KEYCLOAK_VERSION,
