@@ -13,8 +13,8 @@ from build.utils import build_image
     help="Docker Hub username",
 )
 @click.option(
-    "--docker-hub-password",
-    envvar="DOCKER_HUB_PASSWORD",
+    "--docker-hub-token",
+    envvar="DOCKER_HUB_TOKEN",
     help="Docker Hub password",
 )
 @click.option(
@@ -28,14 +28,14 @@ from build.utils import build_image
 )
 def main(
     docker_hub_username: str,
-    docker_hub_password: str,
+    docker_hub_token: str,
     keycloak_version: str,
     registry: str,
 ) -> None:
     """Build and publish image to Docker Hub.
 
     :param docker_hub_username:
-    :param docker_hub_password:
+    :param docker_hub_token:
     :param keycloak_version:
     :param registry:
     :return:
@@ -48,7 +48,7 @@ def main(
     docker_client.login(
         server=registry,
         username=docker_hub_username,
-        password=docker_hub_password,
+        password=docker_hub_token,
     )
 
     build_image(

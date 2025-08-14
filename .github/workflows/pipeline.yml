@@ -54,7 +54,7 @@ jobs:
       - name: Publish Images to Docker Hub
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-          DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
           KEYCLOAK_VERSION: "26.3.2"
         run: |          
           poetry run python -m build.publish
