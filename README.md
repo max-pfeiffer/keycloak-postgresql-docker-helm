@@ -24,14 +24,12 @@ Helm repository URL: [https://max-pfeiffer.github.io/keycloak-postgresql-docker-
 Use the Helm charts to install Keycloak with this Docker Image on Kubernetes:
 ```shell
 helm repo add keycloak-postgresql https://max-pfeiffer.github.io/keycloak-postgresql-docker-helm
-helm install postgresql keycloak-postgresql/postgresql --values your_values.yaml --namespace your-namespace
 helm install keycloak keycloak-postgresql/keycloak --values your_values.yaml --namespace your-namespace
 ```
 
 ### Documentation
 For further documentation and `values.yaml` examples see:
 * [Keycloak Helm Chart](charts%2Fkeycloak%2FREADME.md)
-* [PostgreSQL Helm Chart](charts%2Fpostgresql%2FREADME.md)
 
 ## Information Sources
 * [List of all Keycloak configuration options](https://www.keycloak.org/server/all-config) 
