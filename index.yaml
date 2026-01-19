@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   keycloak:
   - apiVersion: v2
+    appVersion: 26.5.1
+    created: "2026-01-19T21:00:27.86057712Z"
+    description: Helm chart for installing Keycloak identity provider
+    digest: 5b34ecc9b2b21f2409381033b5aa11fcf7b9b24bb3be4a9c68e1c40b4d2e4b9a
+    name: keycloak
+    type: application
+    urls:
+    - https://github.com/max-pfeiffer/keycloak-postgresql-docker-helm/releases/download/keycloak-0.4.0/keycloak-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
     appVersion: 26.3.2
     created: "2025-08-14T11:03:38.147938794Z"
     description: Helm chart for installing Keycloak identity provider
@@ -52,4 +62,4 @@ entries:
     urls:
     - https://github.com/max-pfeiffer/keycloak-postgresql-helm/releases/download/postgresql-0.1.0/postgresql-0.1.0.tgz
     version: 0.1.0
-generated: "2025-08-14T11:03:38.147957649Z"
+generated: "2026-01-19T21:00:27.860598199Z"
