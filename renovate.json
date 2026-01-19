@@ -13,8 +13,6 @@
       "automerge": false
     }
   ],
-  "automerge": true,
-  "requiredStatusChecks": ["ci"],
   "automergeType": "pr",
   "platformAutomerge": true,
   "rebaseWhen": "behind-base-branch",
