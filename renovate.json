@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "config:recommended"
+  ],
+  "enabledManagers": ["poetry"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    }
+  ],
+  "automerge": true,
+  "requiredStatusChecks": ["ci"],
+  "automergeType": "pr",
+  "platformAutomerge": true,
+  "rebaseWhen": "behind-base-branch",
+  "prCreation": "immediate",
+  "dependencyDashboard": true
+}
