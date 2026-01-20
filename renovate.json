@@ -17,5 +17,6 @@
   "platformAutomerge": true,
   "rebaseWhen": "behind-base-branch",
   "prCreation": "immediate",
-  "dependencyDashboard": true
+  "dependencyDashboard": false,
+  "dependencyDashboardApproval": false
 }
