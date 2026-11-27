@@ -1261,14 +1261,14 @@ use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "semver"
-version = "3.1.2"
+version = "3.2.0"
 description = "Python helper for Semantic Versioning (https://semver.org)"
 optional = false
 python-versions = ">=3.10"
 groups = ["dev"]
 files = [
-    {file = "semver-3.1.2-py3-none-any.whl", hash = "sha256:45d107c3fa880910441dfab9d555046cba2829a25feeadfe4a1566439635c510"},
-    {file = "semver-3.1.2.tar.gz", hash = "sha256:bea193552413194252d33ff26ce0962b76669bd1c6fb17e8e203ac37f072feaf"},
+    {file = "semver-3.2.0-py3-none-any.whl", hash = "sha256:7a90434311f2d9914b1902490439d2c37b9477cd27958ff5f67021afa3e5db0b"},
+    {file = "semver-3.2.0.tar.gz", hash = "sha256:adf2c822d2d8908a1dce0121da7da6511851fbd33080e61da8d2ba1e0677e8f3"},
 ]
 
 [package.extras]
@@ -1530,4 +1530,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "d885d10f622ae045e54044cfe9f353e36249a7557dbfc8865acefe298bbf78e0"
+content-hash = "788d44613864bc4a569d56e18ec40868184eec6c55df9de441c26ccae322f988"
